@@ -1,23 +1,13 @@
 1)Technologies & Libraries Used
-
 Python
-
 Pandas
-
 NumPy
-
 Scikit-learn
-
 RandomForestClassifier
-
 Train-test split
-
 LabelEncoder
-
 Accuracy Score
-
-Matplotlib / Seaborn 
-
+Matplotlib 
 flask
 
 2)Crop-Recommendation-System/
