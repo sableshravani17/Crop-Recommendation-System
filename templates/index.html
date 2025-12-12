@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crop Recommendation System</title>
+    <style>
+        body { background: #e8f5e9; font-family: Arial; }
+        .container {
+            width: 60%; margin: auto; background: white;
+            padding: 20px; margin-top: 30px;
+            border-radius: 12px; box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        }
+        h1 { text-align: center; color: #2e7d32; }
+        .error { background: #ffcccc; padding: 10px; color: red;
+                 border-radius: 5px; margin-bottom: 15px; }
+        .regions {
+            background: #c8e6c9; padding: 15px; border-radius: 10px; margin-bottom: 25px;
+        }
+        .feat-desc { font-size: 14px; color: #333; }
+        input { width: 100%; padding: 10px; border-radius: 6px;
+                border: 1px solid #4caf50; margin-bottom: 8px; }
+        small { color: green; display: block; margin-bottom: 5px; }
+        button {
+            width: 100%; padding: 12px; background: #2e7d32;
+            color: white; border: none; border-radius: 6px; cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🌾 Crop Recommendation System</h1>
+
+    {% if error_message %}
+        <div class="error">{{ error_message }}</div>
+    {% endif %}
+
+    <div class="regions">
+        <h2>🌍 Region-wise Crop Categories</h2>
+        {% for region, crops in region_map.items() %}
+            <h3>{{ region }}</h3>
+            <p>{{ crops | join(", ") }}</p>
+        {% endfor %}
+    </div>
+
+    <h2>Enter Soil & Weather Details</h2>
+
+    <form action="/predict" method="POST">
+
+        {% for key, desc in feature_description.items() %}
+            <label class="feat-desc">{{ key }} – {{ desc }}</label>
+
+            <small>Allowed Range: {{ feature_ranges[key][0] }} - {{ feature_ranges[key][1] }}</small>
+
+            <input type="number" step="any" name="{{ key }}" required>
+        {% endfor %}
+
+        <button type="submit">Predict Crop</button>
+    </form>
+</div>
+
+</body>
+</html>
